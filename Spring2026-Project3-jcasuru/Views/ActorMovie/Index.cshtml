@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Spring2026_Project3_jcasuru.Models.ActorMovie>
+
+@{
+    ViewData["Title"] = "Actor Movie Index";
+}
+
+<h1>Actor Movie Index</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="ActorMovie">Create New Actor Movie combo</a>
+</p>
+<table class="table table-striped" data-table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Actor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item .Actor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Movie.Title)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="ActorMovie" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-controller="ActorMovie" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-controller="ActorMovie" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

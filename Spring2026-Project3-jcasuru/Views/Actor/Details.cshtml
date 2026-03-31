@@ -1,0 +1,107 @@
+﻿@model Spring2026_Project3_jcasuru.Models.ViewModels.ActorDetailsViewModel
+
+@{
+    ViewData["Title"] = "Actor Details";
+}
+
+<h1>Actor Details</h1>
+
+<div>
+    <h4>Actor</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Actor.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Actor.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Age)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Actor.Age)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.IMDB_Link)
+        </dt>
+        <dd class="col-sm-10">
+            <a href="@Model.Actor.IMDB_Link" target="_blank">IMDB Link</a>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actor.Photo)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Actor.Photo != null)
+            {
+                <img src="@Url.Action("Photo", "Actor", new { Model.Actor.Id })" width="200" height="200" />
+            }
+        </dd>
+    </dl>
+</div>
+<h2>Movies</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Movie Title
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Movies)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Movie" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-controller="Movie" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-controller="Movie" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h2>People on Twitter Say...</h2>
+@{
+    string paramValue = Model.OverAllActorSentiment.ToString("0.00");
+}
+<h4>Overall Sentiment: @Html.DisplayFor(modelItem => paramValue) </h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tweet</th>
+            <th>Sentiment</th>
+        </tr> 
+    </thead>
+    <tbody>
+        @for (int i =0; i < Model.Tweets.Length && i < Model.TweetSentiments.Length; i++)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Tweets[i])
+                </td>
+                <td>
+                    @{
+                        string sentimentValue = Model.TweetSentiments[i].ToString("0.00");
+                        @Html.DisplayFor(modelItem => sentimentValue)
+                    }  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Edit" asp-controller="Actor" asp-route-id="@Model?.Actor.Id">Edit</a> |
+    <a asp-action="Index" asp-controller="Actor">Back to List</a>
+</div>
+

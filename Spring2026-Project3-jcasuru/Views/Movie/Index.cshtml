@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Spring2026_Project3_jcasuru.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movie Index";
+}
+
+<h1>Movie Index</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Movie">Create New Movie</a>
+</p>
+<table class="table table-striped" data-table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IMDB_Link)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Release_Year)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a href="@item.IMDB_Link" target="_blank">IMDB Page</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Release_Year)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Movie" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-controller="Movie" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-controller="Movie" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

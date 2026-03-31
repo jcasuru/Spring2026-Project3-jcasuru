@@ -1,0 +1,40 @@
+﻿@model Spring2026_Project3_jcasuru.Models.ActorMovie
+
+@{
+    ViewData["Title"] = "Edit ActorMovie Combo";
+}
+
+<h1>Edit</h1>
+
+<h4>Actor Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-controller="ActorMovie">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ActorId" class="control-label">Actor</label>
+                <select asp-for="ActorId" class="form-control" asp-items="ViewBag.ActorId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MovieId" class="control-label">Movie</label>
+                <select asp-for="MovieId" class="form-control" asp-items="ViewBag.MovieId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="ActorMovie">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
